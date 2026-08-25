@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Easy Saturdays Foundation | Digital Platform</title>
+    <style>
+        /* --- RESET & BASE --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        :root {
+            --primary-color: #1e3a8a; /* Deep Blue - Trustworthy */
+            --secondary-color: #f59e0b; /* Amber/Gold - Warmth, Community */
+            --accent-color: #10b981; /* Emerald - Growth, Success */
+            --light-bg: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #f8fafc;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --border-radius: 12px;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* --- HEADER & NAVIGATION --- */
+        header {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: background-color 0.2s ease;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--secondary-color);
+        }
+
+        /* --- PAGE CONTENT --- */
+        .page-section {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+            padding: 3rem 0;
+        }
+
+        .page-section.active-section {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- HERO SECTION (Home) --- */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #0f172a 100%);
+            color: var(--text-light);
+            padding: 4rem 0;
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero h1 span {
+            color: var(--secondary-color);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: var(--text-dark);
+            font-weight: 700;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: var(--shadow);
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 20px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-light);
+            border: 2px solid var(--text-light);
+            box-shadow: none;
+            margin-left: 0.5rem;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: none;
+        }
+        
+        .btn-success {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        /* --- CAMPAIGN CARDS --- */
+        .campaign-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .campaign-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s ease;
+        }
+
+        .campaign-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .campaign-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            background-color: #cbd5e1;
+        }
+
+        .campaign-card .content {
+            padding: 1.5rem;
+        }
+
+        .campaign-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .campaign-card .meta {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar {
+            background-color: #e2e8f0;
+            border-radius: 50px;
+            height: 10px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-bar .progress-fill {
+            height: 100%;
+            background: var(--accent-color);
+            border-radius: 50px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .campaign-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* --- FORMS --- */
+        .form-card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            max-width: 600px;
+            margin: 2rem auto 0;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkbox-group input {
+            width: auto;
+            accent-color: var(--primary-color);
+        }
+
+        /* --- MODAL --- */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal.active-modal {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: var(--shadow);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content h2 {
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+        .modal-content .btn {
+            margin-top: 1.5rem;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 2rem 0;
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        footer a {
+            color: var(--secondary-color);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .nav-links {
+                gap: 0.5rem;
+                width: 100%;
+                justify-content: center;
+                margin-top: 0.5rem;
+            }
+            .nav-links a {
+                padding: 0.3rem 0.7rem;
+                font-size: 0.9rem;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .btn {
+                width: 100%;
+                margin: 0.25rem 0;
+            }
+            .btn-outline {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== HEADER ==================== -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Easy<span>Saturdays</span></div>
+                <ul class="nav-links">
+                    <li><a class="nav-link active" data-section="home">Home</a></li>
+                    <li><a class="nav-link" data-section="campaigns">Campaigns</a></li>
+                    <li><a class="nav-link" data-section="donate">Donate</a></li>
+                    <li><a class="nav-link" data-section="volunteer">Volunteer</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <main class="container">
+        <!-- -------- HOME SECTION -------- -->
+        <section id="home" class="page-section active-section">
+            <div class="hero">
+                <h1>Empowering <span>Tembisa</span> Together</h1>
+                <p>Join The Easy Saturdays Foundation in driving social upliftment through community support, education, and youth empowerment in Ekurhuleni.</p>
+                <div>
+                    <button class="btn" onclick="navigateTo('campaigns')">View Campaigns</button>
+                    <button class="btn btn-outline" onclick="navigateTo('volunteer')">Become a Volunteer</button>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                <div style="background: white; padding: 1.5rem; border-radius: var(--border-radius); box-shadow: var(--shadow); text-align: center;">
+                    <h3 style="color: var(--primary-color); font-size: 2rem;">1,200+</h3>
+                    <p>School Shoes Distributed</p>
+                </div>
+                <div style="background: white; padding: 1.5rem; border-radius: var(--border-radius); box-shadow: var(--shadow); text-align: center;">
+                    <h3 style="color: var(--primary-color); font-size: 2rem;">850+</h3>
+                    <p>Winter Hampers Delivered</p>
+                </div>
+                <div style="background: white; padding: 1.5rem; border-radius: var(--border-radius); box-shadow: var(--shadow); text-align: center;">
+                    <h3 style="color: var(--primary-color); font-size: 2rem;">200+</h3>
+                    <p>Active Volunteers</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- -------- CAMPAIGNS SECTION -------- -->
+        <section id="campaigns" class="page-section">
+            <h2 style="font-size: 2rem; margin-bottom: 1rem;">Active <span style="color: var(--secondary-color);">Campaigns</span></h2>
+            <p style="color: #475569; margin-bottom: 1.5rem;">Support the drives that are changing lives in our community.</p>
+            <div class="campaign-grid" id="campaignContainer">
+                <!-- Campaigns will be injected by JavaScript -->
+            </div>
+        </section>
+
+        <!-- -------- DONATE SECTION -------- -->
+        <section id="donate" class="page-section">
+            <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">Make a <span style="color: var(--secondary-color);">Donation</span></h2>
+            <p style="color: #475569;">Your contribution, no matter the size, makes a tangible difference. All donations are secure and POPIA compliant.</p>
+            <div class="form-card">
+                <form id="donationForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="donorName">Full Name</label>
+                            <input type="text" id="donorName" placeholder="e.g., Thabo Mokoena" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="donorEmail">Email Address</label>
+                            <input type="email" id="donorEmail" placeholder="e.g., thabo@email.com" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="donationCampaign">Support a Campaign</label>
+                        <select id="donationCampaign" required>
+                            <option value="" disabled selected>Select a campaign</option>
+                            <option value="Back-2-School 2026">Back-2-School 2026</option>
+                            <option value="Winter Warmth 2026">Winter Warmth 2026</option>
+                            <option value="Community Food Drive">Community Food Drive</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="donationAmount">Amount (ZAR)</label>
+                        <input type="number" id="donationAmount" placeholder="e.g., 250" min="1" required>
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="popiaConsent" required>
+                        <label for="popiaConsent">I consent to my data being stored in accordance with the Protection of Personal Information Act (POPIA) for the purpose of processing this donation and issuing a Section 18A certificate.</label>
+                    </div>
+                    <button type="submit" class="btn btn-success" style="width: 100%;">Donate Now (Secure)</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- -------- VOLUNTEER SECTION -------- -->
+        <section id="volunteer" class="page-section">
+            <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">Join Our <span style="color: var(--secondary-color);">Volunteer Team</span></h2>
+            <p style="color: #475569;">Be the change. Sign up to help with upcoming drives and community events at our partner locations.</p>
+            <div class="form-card">
+                <form id="volunteerForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="volunteerName">Full Name</label>
+                            <input type="text" id="volunteerName" placeholder="e.g., Lerato Nkosi" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="volunteerEmail">Email Address</label>
+                            <input type="email" id="volunteerEmail" placeholder="e.g., lerato@email.com" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="volunteerPhone">Phone Number</label>
+                        <input type="tel" id="volunteerPhone" placeholder="e.g., 082 123 4567" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="volunteerSkills">Skills / Areas of Interest</label>
+                        <select id="volunteerSkills" required>
+                            <option value="" disabled selected>Select your primary skill</option>
+                            <option value="Event Coordination">Event Coordination</option>
+                            <option value="Logistics & Distribution">Logistics & Distribution</option>
+                            <option value="Marketing & Social Media">Marketing & Social Media</option>
+                            <option value="Fundraising">Fundraising</option>
+                            <option value="Youth Mentorship">Youth Mentorship</option>
+                            <option value="General Support">General Support</option>
+                        </select>
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="volunteerTerms" required>
+                        <label for="volunteerTerms">I agree to abide by the foundation's Code of Conduct and volunteer policies.</label>
+                    </div>
+                    <button type="submit" class="btn btn-success" style="width: 100%;">Register as a Volunteer</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 The Easy Saturdays Foundation. All rights reserved.</p>
+            <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 0.5rem;">
+                <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Contact Us</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- ==================== MODAL ==================== -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <h2>✅ Thank You!</h2>
+            <p id="modalMessage">Your action has been successfully completed. We'll be in touch shortly.</p>
+            <button class="btn" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+
+    <!-- ==================== JAVASCRIPT ==================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- 1. NAVIGATION ---
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('.page-section');
+
+            window.navigateTo = function(sectionId) {
+                // Update nav links
+                navLinks.forEach(link => link.classList.remove('active'));
+                const activeLink = document.querySelector(`.nav-link[data-section="${sectionId}"]`);
+                if (activeLink) activeLink.classList.add('active');
+
+                // Update sections
+                sections.forEach(section => section.classList.remove('active-section'));
+                const targetSection = document.getElementById(sectionId);
+                if (targetSection) targetSection.classList.add('active-section');
+            };
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const sectionId = link.dataset.section;
+                    navigateTo(sectionId);
+                });
+            });
+
+            // --- 2. POPULATE CAMPAIGNS ---
+            const campaigns = [{
+                id: 1,
+                title: 'Back-2-School 2026',
+                description: 'Help us provide school shoes and uniforms to 500+ children in Tembisa.',
+                goal: 50000,
+                raised: 31200,
+                image: 'https://placehold.co/600x400/1e3a8a/ffffff?text=Back+2+School'
+            }, {
+                id: 2,
+                title: 'Winter Warmth 2026',
+                description: 'Ensure our senior citizens and vulnerable families have warm food and blankets.',
+                goal: 75000,
+                raised: 48900,
+                image: 'https://placehold.co/600x400/f59e0b/1e293b?text=Winter+Warmth'
+            }, {
+                id: 3,
+                title: 'Community Food Drive',
+                description: 'Stock the local food bank to support 200+ families facing food insecurity.',
+                goal: 30000,
+                raised: 21050,
+                image: 'https://placehold.co/600x400/10b981/ffffff?text=Food+Drive'
+            }];
+
+            const campaignContainer = document.getElementById('campaignContainer');
+
+            function renderCampaigns() {
+                campaignContainer.innerHTML = campaigns.map(campaign => {
+                    const percentage = Math.min(100, (campaign.raised / campaign.goal) * 100);
+                    return `
+                        <div class="campaign-card">
+                            <img src="${campaign.image}" alt="${campaign.title}">
+                            <div class="content">
+                                <h3>${campaign.title}</h3>
+                                <p class="meta">${campaign.description}</p>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: ${percentage}%;"></div>
+                                </div>
+                                <div class="campaign-stats">
+                                    <span>Raised: R${campaign.raised.toLocaleString()}</span>
+                                    <span>Goal: R${campaign.goal.toLocaleString()}</span>
+                                </div>
+                                <div style="margin-top: 1rem; display: flex; gap: 0.5rem;">
+                                    <button class="btn btn-success" style="padding: 0.5rem 1.5rem; font-size: 0.9rem;" onclick="navigateTo('donate')">Donate</button>
+                                    <button class="btn" style="padding: 0.5rem 1.5rem; font-size: 0.9rem; background-color: #e2e8f0; color: #1e293b;" onclick="navigateTo('volunteer')">Volunteer</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+            renderCampaigns();
+
+            // --- 3. SIMULATED PROGRESS UPDATE (Optional) ---
+            // We could simulate a progress bar update, but it's static for now.
+
+            // --- 4. FORM HANDLING & MODAL ---
+            const modal = document.getElementById('successModal');
+            const modalMessage = document.getElementById('modalMessage');
+
+            window.closeModal = function() {
+                modal.classList.remove('active-modal');
+            };
+
+            function handleFormSubmit(event, message) {
+                event.preventDefault();
+                modalMessage.textContent = message;
+                modal.classList.add('active-modal');
+                event.target.reset();
+            }
+
+            // Donation Form
+            document.getElementById('donationForm').addEventListener('submit', (e) => {
+                handleFormSubmit(e, 'Your donation has been successfully processed. A tax-deductible receipt will be emailed to you shortly.');
+            });
+
+            // Volunteer Form
+            document.getElementById('volunteerForm').addEventListener('submit', (e) => {
+                handleFormSubmit(e, 'Thank you for registering as a volunteer! You will receive an email with further details and shift options.');
+            });
+
+            // Close modal on background click
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+
+        });
+    </script>
+</body>
+</html>
